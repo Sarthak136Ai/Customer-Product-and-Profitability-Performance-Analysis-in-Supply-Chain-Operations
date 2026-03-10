@@ -303,6 +303,105 @@ with col3:
 
 st.markdown("---")
 
+# ============================================================
+# MODULE 5: MARGIN TRENDS & CUSTOMER SEGMENT CONTRIBUTION
+# ============================================================
+st.markdown("## 📈 Margin Trends & Customer Segment Analysis")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("Profit Margin Trend by Shipping Mode & Market")
+    margin_trend = filtered_df.groupby(["Market", "Shipping Mode"]).agg(
+        Revenue=("Sales", "sum"),
+        Profit=("Order Profit Per Order", "sum")
+    ).reset_index()
+    margin_trend["Margin %"] = (margin_trend["Profit"] / margin_trend["Revenue"] * 100).round(2)
+    fig = px.line(
+        margin_trend, x="Shipping Mode", y="Margin %",
+        color="Market", markers=True,
+        title="Margin % by Shipping Mode across Markets",
+        color_discrete_sequence=px.colors.qualitative.Set1
+    )
+    fig.update_layout(xaxis_tickangle=-20)
+    st.plotly_chart(fig, use_container_width=True)
+
+with col2:
+    st.subheader("Margin Trend by Region")
+    region_margin = filtered_df.groupby("Order Region").agg(
+        Revenue=("Sales", "sum"),
+        Profit=("Order Profit Per Order", "sum")
+    ).reset_index()
+    region_margin["Margin %"] = (region_margin["Profit"] / region_margin["Revenue"] * 100).round(2)
+    fig = px.bar(
+        region_margin.sort_values("Margin %", ascending=False),
+        x="Margin %", y="Order Region", orientation="h",
+        color="Margin %", color_continuous_scale="RdYlGn",
+        title="Profit Margin % by Region"
+    )
+    st.plotly_chart(fig, use_container_width=True)
+
+st.markdown("---")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("Customer Segment Contribution to Profit")
+    segment_profit = filtered_df.groupby("Customer Segment").agg(
+        Total_Profit=("Order Profit Per Order", "sum"),
+        Total_Revenue=("Sales", "sum"),
+        Order_Count=("Order Customer Id", "count")
+    ).reset_index()
+    segment_profit["Margin %"] = (
+        segment_profit["Total_Profit"] / segment_profit["Total_Revenue"] * 100
+    ).round(2)
+    fig = px.pie(
+        segment_profit, names="Customer Segment", values="Total_Profit",
+        title="Profit Share by Customer Segment",
+        color_discrete_sequence=px.colors.qualitative.Set2,
+        hole=0.4
+    )
+    fig.update_traces(textposition="inside", textinfo="percent+label")
+    st.plotly_chart(fig, use_container_width=True)
+
+with col2:
+    st.subheader("Revenue vs Profit by Customer Segment")
+    fig = px.bar(
+        segment_profit, x="Customer Segment",
+        y=["Total_Revenue", "Total_Profit"],
+        barmode="group",
+        title="Revenue vs Profit by Segment",
+        color_discrete_sequence=["#1f77b4", "#2ca02c"]
+    )
+    st.plotly_chart(fig, use_container_width=True)
+
+st.markdown("---")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("Margin % by Customer Segment")
+    fig = px.bar(
+        segment_profit, x="Customer Segment", y="Margin %",
+        color="Margin %", color_continuous_scale="Blues",
+        text="Margin %", title="Profit Margin by Segment"
+    )
+    fig.update_traces(texttemplate="%{text:.2f}%", textposition="outside")
+    st.plotly_chart(fig, use_container_width=True)
+
+with col2:
+    st.subheader("Order Count by Customer Segment")
+    fig = px.pie(
+        segment_profit, names="Customer Segment", values="Order_Count",
+        title="Order Share by Customer Segment",
+        color_discrete_sequence=px.colors.qualitative.Pastel,
+        hole=0.4
+    )
+    fig.update_traces(textposition="inside", textinfo="percent+label")
+    st.plotly_chart(fig, use_container_width=True)
+
+st.markdown("---")
+
 # Raw Data Explorer
 st.markdown("## 🔍 Raw Data Explorer")
 st.dataframe(filtered_df.head(500))
