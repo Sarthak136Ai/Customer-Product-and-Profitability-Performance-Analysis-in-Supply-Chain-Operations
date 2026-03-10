@@ -257,7 +257,7 @@ with col1:
                      y="Order Item Profit Ratio",
                      color="Order Item Profit Ratio",
                      opacity=0.5, color_continuous_scale="RdYlGn",
-                     trendline="ols")
+                     trendline="lowess")
     st.plotly_chart(fig, use_container_width=True)
 
 with col2:
