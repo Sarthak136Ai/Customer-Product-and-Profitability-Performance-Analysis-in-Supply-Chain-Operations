@@ -68,16 +68,22 @@ st.sidebar.metric("Filtered Records", f"{len(filtered_df):,}")
 # ============================================================
 st.markdown("## 📊 Revenue & Profit Overview")
 
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3, col4, col5, col6 = st.columns(6)
 total_revenue = filtered_df["Sales"].sum()
 total_profit = filtered_df["Order Profit Per Order"].sum()
 profit_margin = (total_profit / total_revenue * 100) if total_revenue > 0 else 0
 total_orders = len(filtered_df)
 
+avg_margin_with_discount = filtered_df[filtered_df["Order Item Discount Rate"] > 0]["Order Item Profit Ratio"].mean() * 100
+avg_margin_without_discount = filtered_df[filtered_df["Order Item Discount Rate"] == 0]["Order Item Profit Ratio"].mean() * 100
+discount_impact_ratio = avg_margin_without_discount - avg_margin_with_discount
+
 col1.metric("Total Revenue", f"${total_revenue:,.0f}")
 col2.metric("Total Profit", f"${total_profit:,.0f}")
 col3.metric("Profit Margin", f"{profit_margin:.2f}%")
 col4.metric("Total Orders", f"{total_orders:,}")
+col5.metric("Avg Discount Rate", f"{filtered_df['Order Item Discount Rate'].mean() * 100:.2f}%")
+col6.metric("Discount Impact Ratio", f"-{discount_impact_ratio:.2f}%", delta=f"{discount_impact_ratio:.2f}% margin lost", delta_color="inverse")
 
 st.markdown("---")
 
