@@ -1,8 +1,8 @@
-# \# Customer, Product and Profitability Performance Analysis in Supply Chain Operations
+# Customer, Product and Profitability Performance Analysis in Supply Chain Operations
 
 # 
 
-# \## Overview
+# Overview
 
 # This project analyzes customer behavior, product performance, and profitability
 
@@ -10,19 +10,17 @@
 
 # 
 
-# \## Dataset
+# Dataset
 
-# \- \*\*Source:\*\* APL\_Logistics.csv
+# \- Source: APL\_Logistics.csv
 
-# \- \*\*Size:\*\* 180,519 rows × 40 columns
+# \- Size: 180,519 rows × 40 columns
 
-# \- \*\*Target:\*\* Late\_delivery\_risk (0 = On Time, 1 = Late)
+# \- Target: Late\_delivery\_risk (0 = On Time, 1 = Late)
 
 # 
 
-# \## Project Structure
-
-# ```
+# Project Structure
 
 # ├── data/
 
@@ -44,13 +42,9 @@
 
 # └── README.md
 
-# ```
-
 # 
 
-# \## Setup
-
-# ```bash
+# Setup
 
 # python -m venv venv
 
@@ -58,43 +52,33 @@
 
 # pip install -r requirements.txt
 
-# ```
-
 # 
 
-# \## Usage
+# Usage
 
-# \*\*Train the model:\*\*
-
-# ```bash
+# Train the model:
 
 # python src/train.py
 
-# ```
-
 # 
 
-# \*\*Run predictions:\*\*
-
-# ```bash
+# Run predictions:
 
 # python src/predict.py
 
-# ```
+# 
+
+# Results
+
+# \- Model: Random Forest Classifier
+
+# \- Accuracy: 100%
+
+# \- Predictions saved to: data/processed/predictions.csv
 
 # 
 
-# \## Results
-
-# \- \*\*Model:\*\* Random Forest Classifier
-
-# \- \*\*Accuracy:\*\* 100%
-
-# \- \*\*Predictions saved to:\*\* data/processed/predictions.csv
-
-# 
-
-# \## Technologies
+# Technologies
 
 # \- Python 3.13
 
