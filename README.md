@@ -1,94 +1,123 @@
-# Customer, Product and Profitability Performance Analysis in Supply Chain Operations
+# 🚚 Customer, Product and Profitability Performance Analysis in Supply Chain Operations
 
-# 
+> Shifting supply chain analytics from operational efficiency to **commercial intelligence**.
 
-# Overview
+---
 
-# This project analyzes customer behavior, product performance, and profitability
+## 📌 Overview
 
-# in supply chain operations using machine learning to predict late delivery risk.
+This project analyzes **customer behavior**, **product performance**, and **profitability** in supply chain operations using machine learning to predict late delivery risk across 179,342 clean transactions from APL Logistics.
 
-# 
+---
 
-# Dataset
+## 🎯 Problem Statement
 
-# \- Source: APL\_Logistics.csv
+Despite having detailed order and sales data, the organization lacked:
 
-# \- Size: 180,519 rows × 40 columns
+- 📉 Visibility into profitability by customer and product
+- 💸 Understanding of discount-driven margin erosion
+- 👥 Identification of high-value vs low-value customers
+- 🌍 Market and category-level profit diagnostics
 
-# \- Target: Late\_delivery\_risk (0 = On Time, 1 = Late)
+---
 
-# 
+## 📊 Key Results
 
-# Project Structure
+| Metric | Value |
+|--------|-------|
+| Total Revenue | $36.55M |
+| Total Profit | $3.97M |
+| Profit Margin | 10.85% |
+| Unique Customers | 20,599 |
+| Late Delivery Rate | 54.6% |
+| ML Model Accuracy | 100% |
+| Discount Impact Ratio | -0.74% margin lost |
 
-# ├── data/
+---
 
-# │   ├── raw/               # Original dataset
+## 🗂️ Project Structure
+```
+├── data/
+│   ├── raw/                  # APL_Logistics.csv (179,342 records)
+│   └── processed/            # predictions.csv, customer_segments.csv
+├── models/                   # model.pkl, scaler.pkl
+├── notebooks/                # analysis.ipynb
+├── src/
+│   ├── train.py              # ML training script
+│   ├── predict.py            # Prediction script
+│   ├── dashboard.py          # Streamlit dashboard
+│   ├── advanced_analysis.py  # Customer & product analysis
+│   └── check_analysis.py     # Diagnostic script
+├── requirements.txt
+└── README.md
+```
 
-# │   └── processed/         # Predictions output
+---
 
-# ├── models/                # Saved model and scaler
+## 🚀 Setup
+```bash
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-# ├── notebooks/             # Jupyter analysis notebook
+---
 
-# ├── src/
+## ▶️ Usage
 
-# │   ├── train.py           # Model training script
+**Train the model:**
+```bash
+python src/train.py
+```
 
-# │   └── predict.py         # Prediction script
+**Run predictions:**
+```bash
+python src/predict.py
+```
 
-# ├── requirements.txt
+**Launch dashboard:**
+```bash
+streamlit run src/dashboard.py
+```
 
-# └── README.md
+---
 
-# 
+## 📈 Dashboard Modules
 
-# Setup
+- 📊 Revenue & Profit Overview
+- 👥 Customer Value Dashboard
+- 📦 Product & Category Performance
+- 💰 Discount Impact Analyzer with What-If Scenarios
+- 📈 Margin Trend Charts
+- 🌍 Market & Regional Analysis
 
-# python -m venv venv
+🔗 **Live Dashboard:** [supply-chain-profitability-analysis.streamlit.app](https://supply-chain-profitability-analysis.streamlit.app)
 
-# venv\\Scripts\\activate
+---
 
-# pip install -r requirements.txt
+## 🤖 Machine Learning
 
-# 
+- **Model:** Random Forest Classifier
+- **Accuracy:** 100%
+- **Target:** Late Delivery Risk (0 = On Time, 1 = Late)
+- **Features:** Shipping mode, scheduled vs actual days, order region, product category
 
-# Usage
+---
 
-# Train the model:
+## 🛠️ Technologies
 
-# python src/train.py
+![Python](https://img.shields.io/badge/Python-3.13-blue)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-1.7.0-orange)
+![Pandas](https://img.shields.io/badge/Pandas-2.2.3-green)
+![Streamlit](https://img.shields.io/badge/Streamlit-live-red)
+![Plotly](https://img.shields.io/badge/Plotly-interactive-purple)
 
-# 
+---
 
-# Run predictions:
+## 📄 Deliverables
 
-# python src/predict.py
-
-# 
-
-# Results
-
-# \- Model: Random Forest Classifier
-
-# \- Accuracy: 100%
-
-# \- Predictions saved to: data/processed/predictions.csv
-
-# 
-
-# Technologies
-
-# \- Python 3.13
-
-# \- scikit-learn
-
-# \- pandas
-
-# \- matplotlib
-
-# \- seaborn
-
-# \- joblib
-
+- ✅ Research Paper (EDA, insights, recommendations)
+- ✅ Executive Summary (government stakeholders)
+- ✅ Live Streamlit Dashboard
+- ✅ ML Model with 100% accuracy
+- ⏳ Project Feedback Video (coming soon)
